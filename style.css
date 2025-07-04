@@ -1,0 +1,315 @@
+/* General body and typography styles */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #bad8ed; /* Adjusted to approximate the background color in the image */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header styles */
+header {
+    background-color: #bad8ed; /* Same as body for seamless top */
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #4682b4; /* Darker blue for text, similar to header in image */
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.menu-icon {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Main content area */
+main {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Card styles */
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px; /* Fixed width based on image */
+    min-height: 280px; /* Minimum height to maintain consistency */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 15px;
+}
+
+.card-header {
+    background-color: #4682b4; /* Dark blue for card header */
+    color: white;
+    padding: 10px 15px;
+    width: 100%;
+    box-sizing: border-box;
+    font-weight: bold;
+    text-align: left;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+/* Style untuk input field saat mengedit judul kartu */
+.card-header input[type="text"] {
+    background-color: rgba(255, 255, 255, 0.2); /* Latar belakang sedikit transparan agar tetap terlihat header aslinya */
+    border: 1px solid rgba(255, 255, 255, 0.7); /* Border putih transparan */
+    color: white; /* Warna teks putih */
+    padding: 2px 5px; /* Tambahkan sedikit padding agar tidak terlalu mepet */
+    border-radius: 3px; /* Sudut sedikit melengkung */
+    box-sizing: border-box; /* Pastikan padding tidak menambah lebar */
+}
+
+.placeholder-image {
+    background-color: #e0e0e0;
+    width: 80%;
+    height: 120px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    color: #cccccc;
+    border-radius: 5px; /* Slightly rounded corners for the placeholder */
+    position: relative; /* PENTING: Untuk memposisikan ikon edit gambar dan ikon plus */
+    overflow: hidden; /* Penting jika ikon edit berada di luar batas gambar */
+}
+
+/* Tambahan style untuk gambar yang diupload */
+.placeholder-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Untuk memastikan gambar mengisi seluruh area */
+    border-radius: 5px;
+}
+
+/* Style untuk ikon plus di placeholder */
+.placeholder-image .plusIconStyle {
+    position: absolute; /* Posisikan di tengah */
+    background-color: rgba(255, 255, 255, 0.7); /* Latar belakang semi-transparan */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: #777;
+    cursor: pointer; /* Menandakan bisa diklik */
+    pointer-events: auto; /* Memastikan bisa diklik */
+    z-index: 10; /* Pastikan di atas gambar */
+}
+
+/* Style untuk ikon edit gambar */
+.edit-icon {
+    position: absolute;
+    top: 5px; /* Sesuaikan posisi vertikal */
+    right: 5px; /* Sesuaikan posisi horizontal */
+    background-color: rgba(0, 0, 0, 0.5); /* Latar belakang semi-transparan */
+    color: white;
+    border-radius: 50%;
+    width: 25px; /* Ukuran ikon */
+    height: 25px; /* Ukuran ikon */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px; /* Ukuran font ikon pensil */
+    cursor: pointer; /* Menandakan bisa diklik */
+    z-index: 15; /* Pastikan di atas gambar dan ikon plus */
+    transition: background-color 0.2s; /* Efek hover */
+}
+
+.edit-icon:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Efek hover */
+}
+
+.card-content {
+    width: 80%;
+    text-align: left;
+    margin-top: 15px;
+}
+
+/* Style untuk target amount dan ikon editnya */
+.target-amount {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: flex; /* Gunakan flexbox untuk menata teks dan ikon */
+    align-items: center; /* Selaraskan item secara vertikal */
+    justify-content: flex-start; /* Untuk menempatkan di kiri */
+}
+
+/* Style untuk ikon pensil di samping teks nominal */
+.edit-icon-text {
+    font-size: 14px; /* Ukuran ikon pensil */
+    color: #888; /* Warna abu-abu yang lebih lembut */
+    margin-left: 5px; /* Jarak dari teks nominal */
+    vertical-align: middle; /* Selaraskan vertikal dengan teks */
+    cursor: pointer; /* Menandakan bisa diklik */
+    transition: color 0.2s; /* Efek hover */
+}
+
+.edit-icon-text:hover {
+    color: #4682b4; /* Warna biru saat hover */
+}
+
+.weekly-saving {
+    font-size: 14px;
+    color: #555;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-button {
+    background-color: #4682b4;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1; /* Adjust line height to center the plus sign */
+}
+
+.estimation {
+    font-size: 12px;
+    color: #777;
+    margin-top: 10px;
+    width: 80%;
+    text-align: left;
+}
+
+/* Perubahan untuk progress bar dan persentase agar berdampingan */
+.progress-container-with-percentage {
+    width: 80%; /* Kontainer yang membungkus bar dan teks persentase */
+    display: flex;
+    align-items: center; /* Untuk menyelaraskan secara vertikal */
+    justify-content: flex-start; /* Untuk menempatkan di kiri */
+    margin-top: 5px; /* Jarak dari estimasi */
+}
+
+.progress-bar-container {
+    width: 65%; /* Mengurangi lebar kontainer progress bar */
+    background-color: #ffffff;
+    border-radius: 5px;
+    height: 5px;
+    position: relative;
+    display: inline-block; /* Agar lebar width berlaku dan bisa di samping elemen lain */
+    vertical-align: middle; /* Untuk menyelaraskan secara vertikal dengan teks persentase */
+}
+
+.progress-bar {
+    width: 0%; /* Initial progress */
+    height: 100%;
+    background-color: #4682b4; /* Progress bar color */
+    border-radius: 5px;
+}
+
+/* Ubah style untuk teks persentase */
+.progress-percentage-text {
+    font-size: 11px;
+    color: #555;
+    white-space: nowrap;
+    margin-left: 5px; /* Memberi sedikit jarak dari progress bar */
+    display: inline-block; /* Agar bisa di samping progress bar */
+    vertical-align: middle; /* Untuk menyelaraskan secara vertikal dengan progress bar */
+}
+
+/* Style for the "Add New Card" button */
+.add-new-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #4682b4; /* Border putus-putus */
+    background-color: #f0f8ff; /* Warna latar lebih terang */
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    min-height: 280px; /* Samakan dengan tinggi kartu lain */
+}
+
+.add-new-card:hover {
+    background-color: #e6f2ff; /* Warna saat hover */
+    border-color: #357ebd;
+}
+
+.add-card-icon {
+    font-size: 80px;
+    color: #4682b4;
+    line-height: 1; /* Pastikan + di tengah */
+}
+
+.add-card-text {
+    font-size: 16px;
+    color: #4682b4;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Tambahan CSS untuk input field yang muncul saat edit nominal dan periode*/
+.card-content input[type="text"],
+.card-content input[type="number"],
+.card-content select {
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 2px 5px;
+    box-sizing: border-box;
+    width: 150px; /* Sesuaikan lebar input */
+    margin-right: 5px; /* Sedikit jarak dari ikon edit */
+}
+
+/* Styling untuk dropdown menu */
+.dropdown-menu {
+    position: absolute;
+    top: 60px; /* Sesuaikan dengan tinggi header Anda */
+    right: 20px; /* Sesuaikan posisi dari kanan */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    min-width: 150px;
+    z-index: 1000; /* Pastikan di atas elemen lain */
+    display: none; /* Sembunyikan secara default */
+}
+
+.dropdown-menu.active {
+    display: block; /* Tampilkan ketika memiliki kelas 'active' */
+}
+
+.dropdown-menu li {
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    transition: background-color 0.2s;
+}
+
+.dropdown-menu li:hover {
+    background-color: #f0f0f0;
+}

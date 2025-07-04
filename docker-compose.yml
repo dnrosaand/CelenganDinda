@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: postgres    # <-- User yang digunakan oleh container DB
+      POSTGRES_PASSWORD: admindinda # <-- Password yang digunakan oleh container DB
+      POSTGRES_DB: celengan_rosa_db
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5435:5432"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  backend:
+    build: ./backend
+    environment:
+      PORT: 3000
+      DB_USER: postgres    # <--- UBAH INI: Sesuaikan dengan POSTGRES_USER di DB
+      DB_HOST: db
+      DB_NAME: celengan_rosa_db
+      DB_PASSWORD: admindinda # <--- UBAH INI: Sesuaikan dengan POSTGRES_PASSWORD di DB
+      DB_PORT: 5432
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  pg_data:
