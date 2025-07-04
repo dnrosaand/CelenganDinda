@@ -1,8 +1,8 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
 // Ganti dengan kredensial kamu
-const SUPABASE_URL = 'https://oxxezxnivymttcfdxkrp.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im94eGV6eG5pdnltdHRjZmR4a3JwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE2MzkzNzcsImV4cCI6MjA2NzIxNTM3N30.iecyz7dkHC2BDGLypFYxrJ1bTmSvCukalo4PBlU5Cck';
+const SUPABASE_URL = 'https://ovfsldqbdjhxuxcrpugu.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im92ZnNsZHFiZGpoeHV4Y3JwdWd1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA4OTY0ODMsImV4cCI6MjA2NjQ3MjQ4M30.VE0k4IMLahiImnd7KJmNu7a7bjKhneWsf6FFJvuCuOM';
 const SUPABASE_TABLE_NAME = 'savings';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
