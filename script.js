@@ -6,22 +6,13 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const SUPABASE_TABLE_NAME = 'savings';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-// Ambil data saat halaman dimuat
 document.addEventListener('DOMContentLoaded', fetchSavings);
-
-// Tambah Tabungan Baru
 document.getElementById('addNewCardButton').addEventListener('click', showNewSavingForm);
 
 async function fetchSavings() {
   const main = document.getElementById('mainContent');
-
-  // Ambil data dari Supabase
   const { data, error } = await supabase.from(SUPABASE_TABLE_NAME).select('*');
-  if (error) {
-    console.error("Fetch error:", error.message);
-    return;
-  }
+  if (error) return console.error("Fetch error:", error.message);
 
   // Hapus kartu lama
   const existingCards = main.querySelectorAll('.card:not(#addNewCardButton)');
@@ -36,7 +27,10 @@ async function fetchSavings() {
     const percentage = Math.floor((item.currentAmount / item.targetAmount) * 100);
 
     card.innerHTML = `
-      <div class="card-header">${item.title}</div>
+      <div class="card-header">
+        ${item.title}
+        <button class="delete-button" style="float:right; color:red;" data-id="${item.id}">Hapus</button>
+      </div>
       <div class="placeholder-image">
         <input type="file" accept="image/*" style="display: none;">
         <img class="uploaded-image-display" src="${item.imageUrl || ''}" style="${item.imageUrl ? 'display:block;' : 'display:none;'}">
@@ -63,12 +57,19 @@ async function fetchSavings() {
     main.insertBefore(card, document.getElementById('addNewCardButton'));
   });
 
-  // Tambahkan listener ke tombol '+'
   document.querySelectorAll('.add-button').forEach(button => {
     button.addEventListener('click', handleAddSaving);
   });
 
-  // Upload gambar
+  document.querySelectorAll('.delete-button').forEach(button => {
+    button.addEventListener('click', async (e) => {
+      const id = e.target.getAttribute('data-id');
+      if (confirm("Yakin ingin menghapus tabungan ini?")) {
+        await handleDeleteSaving(id);
+      }
+    });
+  });
+
   document.querySelectorAll('.plusIconStyle, .edit-icon').forEach(icon => {
     icon.addEventListener('click', (e) => {
       const input = e.target.parentElement.querySelector('input[type="file"]');
@@ -94,10 +95,7 @@ async function handleAddSaving(e) {
     .eq('id', cardId)
     .single();
 
-  if (error || !data) {
-    console.error("Gagal mengambil data:", error?.message);
-    return;
-  }
+  if (error || !data) return console.error("Gagal mengambil data:", error?.message);
 
   const newAmount = data.currentAmount + data.savingRate;
   const { error: updateError } = await supabase
@@ -142,12 +140,12 @@ async function showNewSavingForm() {
 
 async function uploadImage(file, cardId) {
   const fileName = `saving-${cardId}-${Date.now()}.${file.name.split('.').pop()}`;
-  const { data, error } = await supabase.storage
+  const { error: uploadError } = await supabase.storage
     .from('images')
     .upload(fileName, file, { upsert: true });
 
-  if (error) {
-    console.error("Upload error:", error.message);
+  if (uploadError) {
+    console.error("Upload error:", uploadError.message);
     return;
   }
 
@@ -159,6 +157,19 @@ async function uploadImage(file, cardId) {
 
   if (updateError) {
     console.error("Gagal update gambar:", updateError.message);
+  } else {
+    fetchSavings();
+  }
+}
+
+async function handleDeleteSaving(id) {
+  const { error } = await supabase
+    .from(SUPABASE_TABLE_NAME)
+    .delete()
+    .eq('id', id);
+
+  if (error) {
+    console.error("Gagal menghapus:", error.message);
   } else {
     fetchSavings();
   }
